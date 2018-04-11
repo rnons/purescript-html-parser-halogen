@@ -17,7 +17,7 @@ import Data.List (List)
 import Data.List as List
 import Data.String (fromCharArray)
 import Text.Parsing.StringParser (Parser, ParseError, runParser, try)
-import Text.Parsing.StringParser.Combinators (choice, many, manyTill, option, sepEndBy)
+import Text.Parsing.StringParser.Combinators (many, manyTill, option, optional, sepEndBy)
 import Text.Parsing.StringParser.String (anyChar, regex, skipSpaces, string, whiteSpace)
 
 data HtmlNode
@@ -62,12 +62,20 @@ openingParser = do
   attributes <- whiteSpace *> sepEndBy attributeParser whiteSpace
   pure $ mkElement tagName attributes List.Nil
 
+selfClosingTags :: Array String
+selfClosingTags =
+  [ "br", "img", "hr", "meta", "input", "embed", "area", "base", "col"
+  , "keygen", "link", "param", "source", "command", "link", "track", "wbr"
+  ]
+
+isSelfClosingElement :: Element -> Boolean
+isSelfClosingElement ele = ele.name `Array.elem` selfClosingTags
+
 closingOrChildrenParser :: Element -> Parser Element
 closingOrChildrenParser element = defer \_ ->
-  choice
-    [ whiteSpace *> string "/>" *> pure element
-    , childrenParser
-    ]
+  if isSelfClosingElement element
+  then whiteSpace *> optional (string "/") *> string ">" *> pure element
+  else childrenParser
   where
     childrenParser = do
       _ <- whiteSpace *> string ">"
