@@ -36,7 +36,8 @@ module.exports = {
       template: "src/index.html",
       filename: "index.html",
       minify: {
-        collapseWhitespace: true
+        collapseWhitespace: true,
+        minifyCSS: true
       }
     })
   ]
