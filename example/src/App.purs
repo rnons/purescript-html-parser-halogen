@@ -35,6 +35,7 @@ See README for more info.
   </div>
   <div class="footer">
     <a href="https://github.com/rnons/purescript-html-parser-halogen/tree/master/example">source code</a>
+    Powered by <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/PureScript_Logo.png" style="width: 1rem; height: 1rem">
   </div>
 </div>
 """
@@ -44,6 +45,9 @@ initialState = { value: initValue }
 
 class_ :: forall r i. String -> HP.IProp ("class" :: String | r) i
 class_ = HP.class_ <<< HH.ClassName
+
+style :: forall r i. String -> HP.IProp ("style" :: String | r) i
+style = HP.attr (HH.AttrName "style")
 
 render :: State -> H.ComponentHTML Query
 render state =
@@ -66,6 +70,11 @@ render state =
   , HH.div [ class_ "footer" ]
     [ HH.a
       [ HP.href demoSourceUrl] [HH.text "source code"]
+    , HH.text " Powered by "
+    , HH.img
+      [ HP.src "https://upload.wikimedia.org/wikipedia/commons/6/64/PureScript_Logo.png"
+      , style "width: 1rem; height: 1rem"
+      ]
     ]
   ]
   where
