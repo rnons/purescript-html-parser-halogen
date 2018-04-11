@@ -8,7 +8,7 @@
 
 A library to render raw HTML string into halogen views.
 
-See [Demo](https://rnons.github.io/purescript-html-parser-halogen) for an example.
+See [Demo](https://rnons.github.io/purescript-html-parser-halogen/) for an example.
 
 ## How to use
 
@@ -27,7 +27,9 @@ It's as simple as this, in most cases you only need the `render` function from `
 
 ## Be cautious
 
-This library doesn't support malformed HTML, and is prone to XSS attack. Use it only when you trust the HTML string. You can balance and sanitize the HTML on the backend, e.g. `sanitizeBalance` from [xss-sanitize](http://hackage.haskell.org/package/xss-sanitize/docs/Text-HTML-SanitizeXSS.html#v:sanitizeBalance)
+This library doesn't support malformed HTML, and is prone to XSS attack. Use it only when you trust the HTML string.
+
+You can balance and sanitize the HTML on the backend, e.g. `sanitizeBalance` from [xss-sanitize](http://hackage.haskell.org/package/xss-sanitize/docs/Text-HTML-SanitizeXSS.html#v:sanitizeBalance).
 
 ## How it works
 
