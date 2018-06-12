@@ -1,3 +1,3 @@
-import Main from './Main.purs';
+import Main from "Main";
 
 Main.main();

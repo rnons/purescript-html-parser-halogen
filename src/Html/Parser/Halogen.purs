@@ -37,4 +37,4 @@ parse raw =
 
 render :: forall p i. String -> HTML p i
 render raw = HH.div_ $
-  either (\err -> [ HH.text err ]) id (parse raw)
+  either (\err -> [ HH.text err ]) identity (parse raw)

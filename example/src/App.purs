@@ -93,5 +93,5 @@ app =
   eval :: Query ~> H.ComponentDSL State Query Void m
   eval = case _ of
     OnValueChange value next -> do
-      H.modify $ _ { value = value }
+      void $ H.modify $ _ { value = value }
       pure next

@@ -15,7 +15,7 @@ import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
 import Data.List (List)
 import Data.List as List
-import Data.String (fromCharArray)
+import Data.String.CodeUnits (fromCharArray)
 import Text.Parsing.StringParser (Parser, ParseError, runParser, try)
 import Text.Parsing.StringParser.Combinators (many, manyTill, option, optional, sepEndBy)
 import Text.Parsing.StringParser.String (anyChar, regex, skipSpaces, string, whiteSpace)
