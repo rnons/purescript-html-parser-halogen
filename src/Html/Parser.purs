@@ -18,7 +18,7 @@ import Data.List as List
 import Data.String.CodeUnits (fromCharArray)
 import Text.Parsing.StringParser (Parser, ParseError, runParser, try)
 import Text.Parsing.StringParser.Combinators (many, manyTill, option, optional, sepEndBy)
-import Text.Parsing.StringParser.String (anyChar, regex, skipSpaces, string, whiteSpace)
+import Text.Parsing.StringParser.CodeUnits (anyChar, regex, skipSpaces, string, whiteSpace)
 
 data HtmlNode
   = HtmlElement Element

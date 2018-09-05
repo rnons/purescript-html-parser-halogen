@@ -49,7 +49,7 @@ class_ = HP.class_ <<< HH.ClassName
 style :: forall r i. String -> HP.IProp ("style" :: String | r) i
 style = HP.attr (HH.AttrName "style")
 
-render :: State -> H.ComponentHTML Query
+render :: forall m. State -> H.ComponentHTML Query () m
 render state =
   HH.div [ class_ "grid" ]
   [ HH.h2 [ class_ "header" ]
@@ -88,9 +88,11 @@ app =
     , render
     , eval
     , receiver: const Nothing
+    , initializer: Nothing
+    , finalizer: Nothing
     }
   where
-  eval :: Query ~> H.ComponentDSL State Query Void m
+  eval :: Query ~> H.HalogenM State Query () Void m
   eval = case _ of
     OnValueChange value next -> do
       void $ H.modify $ _ { value = value }

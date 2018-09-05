@@ -20,9 +20,9 @@
     "example"
   ],
   "dependencies": {
-    "purescript-string-parsers": "^4.0.0",
+    "purescript-string-parsers": "^5.0.0",
     "purescript-generics-rep": "^6.0.0",
-    "purescript-halogen": "^4.0.0"
+    "purescript-halogen": "https://github.com/slamdata/purescript-halogen.git#e43096ccde699f68f1803acd23bab493a7190e2c"
   },
   "devDependencies": {
     "purescript-psci-support": "^4.0.0"
