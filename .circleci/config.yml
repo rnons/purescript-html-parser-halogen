@@ -1,0 +1,29 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - deps-{{ checksum "bower.json" }}-{{ checksum "package.json" }}
+
+      - run:
+          command: |
+            yarn add --dev bower purescript pulp
+            yarn
+            yarn bower install
+
+      - save_cache:
+          paths:
+            - node_modules
+            - bower_components
+          key: deps-{{ checksum "bower.json" }}-{{ checksum "package.json" }}
+
+      - run:
+          command: |
+            yarn test
