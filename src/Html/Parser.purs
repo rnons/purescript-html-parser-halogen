@@ -25,7 +25,8 @@ data HtmlNode
   | HtmlText String
   | HtmlComment String
 
-derive instance genericRepHtmlNode :: Generic HtmlNode _
+derive instance eqHtmlNode :: Eq HtmlNode
+derive instance genericHtmlNode :: Generic HtmlNode _
 instance showHtmlNode :: Show HtmlNode where show = defer \_ -> genericShow
 
 type Element =
@@ -36,7 +37,8 @@ type Element =
 
 data HtmlAttribute = HtmlAttribute String String
 
-derive instance genericRepHtmlAttribute :: Generic HtmlAttribute _
+derive instance eqHtmlAttribute :: Eq HtmlAttribute
+derive instance genericHtmlAttribute :: Generic HtmlAttribute _
 instance showHtmlAttribute :: Show HtmlAttribute where show = genericShow
 
 mkElement :: String -> List HtmlAttribute -> List HtmlNode -> Element
@@ -58,7 +60,7 @@ attributeParser = do
 openingParser :: Parser Element
 openingParser = do
   _ <- string "<"
-  tagName <- regex "[^/> ]+"
+  tagName <- regex "[^/>\n ]+"
   attributes <- whiteSpace *> sepEndBy attributeParser whiteSpace
   pure $ mkElement tagName attributes List.Nil
 
