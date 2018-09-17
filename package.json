@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "test": "pulp build -I test && jest"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
+}

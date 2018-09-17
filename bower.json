@@ -13,11 +13,12 @@
   "license": "BSD-3-Clause",
   "ignore": [
     "**/.*",
-    "node_modules",
     "bower_components",
-    "output",
     "docs",
-    "example"
+    "example",
+    "node_modules",
+    "output",
+    "yarn.lock"
   ],
   "dependencies": {
     "purescript-string-parsers": "^5.0.0",
@@ -25,6 +26,8 @@
     "purescript-halogen": "https://github.com/slamdata/purescript-halogen.git#e43096ccde699f68f1803acd23bab493a7190e2c"
   },
   "devDependencies": {
-    "purescript-psci-support": "^4.0.0"
+    "purescript-psci-support": "^4.0.0",
+    "purescript-jest": "^0.2.0",
+    "purescript-debug": "^4.0.0"
   }
 }
