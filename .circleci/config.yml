@@ -17,7 +17,7 @@ jobs:
             yarn add --dev bower purescript pulp
             yarn
             yarn bower install
-            yarn pulp build -I test
+            yarn build:ci
 
       - save_cache:
           paths:
