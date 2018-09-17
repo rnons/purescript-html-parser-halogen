@@ -17,13 +17,15 @@ jobs:
             yarn add --dev bower purescript pulp
             yarn
             yarn bower install
+            pulp build -- +RTS -N2 -RTS
 
       - save_cache:
           paths:
             - node_modules
             - bower_components
+            - output
           key: deps-{{ checksum "bower.json" }}-{{ checksum "package.json" }}
 
       - run:
           command: |
-            yarn test
+            yarn jest
