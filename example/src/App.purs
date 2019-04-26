@@ -2,15 +2,17 @@ module App where
 
 import Prelude
 
+import Data.Const (Const)
 import Data.Maybe (Maybe(..))
-
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Html.Parser.Halogen as PH
 
-data Query a = OnValueChange String a
+type Query = Const Void
+
+data Action = OnValueChange String
 
 type State = { value:: String }
 
@@ -49,7 +51,7 @@ class_ = HP.class_ <<< HH.ClassName
 style :: forall r i. String -> HP.IProp ("style" :: String | r) i
 style = HP.attr (HH.AttrName "style")
 
-render :: forall m. State -> H.ComponentHTML Query () m
+render :: forall m. State -> H.ComponentHTML Action () m
 render state =
   HH.div [ class_ "grid" ]
   [ HH.h2 [ class_ "header" ]
@@ -59,7 +61,7 @@ render state =
     , HH.textarea
       [ class_ "edit"
       , HP.value state.value
-      , HE.onValueInput $ HE.input OnValueChange
+      , HE.onValueInput $ Just <<< OnValueChange
       ]
     ]
   , HH.div [ class_ "col col-preview" ]
@@ -82,18 +84,14 @@ render state =
   demoSourceUrl = repoUrl <> "/tree/master/example"
 
 app :: forall m. H.Component HH.HTML Query Unit Void m
-app =
-  H.component
-    { initialState: const initialState
-    , render
-    , eval
-    , receiver: const Nothing
-    , initializer: Nothing
-    , finalizer: Nothing
-    }
-  where
-  eval :: Query ~> H.HalogenM State Query () Void m
-  eval = case _ of
-    OnValueChange value next -> do
-      void $ H.modify $ _ { value = value }
-      pure next
+app = H.mkComponent
+  { initialState: const initialState
+  , render
+  , eval: H.mkEval $ H.defaultEval
+      { handleAction = handleAction }
+  }
+
+handleAction :: forall m. Action -> H.HalogenM State Action () Void m Unit
+handleAction = case _ of
+  OnValueChange value -> do
+    H.modify_ $ _ { value = value }
