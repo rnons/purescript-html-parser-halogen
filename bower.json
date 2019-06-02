@@ -20,9 +20,9 @@
     "example"
   ],
   "dependencies": {
-    "purescript-string-parsers": "^4.0.0",
+    "purescript-string-parsers": "^5.0.0",
     "purescript-generics-rep": "^6.0.0",
-    "purescript-halogen": "^4.0.0"
+    "purescript-halogen": "^5.0.0"
   },
   "devDependencies": {
     "purescript-psci-support": "^4.0.0"
