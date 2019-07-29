@@ -1,7 +1,7 @@
 # purescript-html-parser-halogen
 
 [![purescript-html-parser-halogen on Pursuit](https://pursuit.purescript.org/packages/purescript-html-parser-halogen/badge)](https://pursuit.purescript.org/packages/purescript-html-parser-halogen)
-[![CircleCI](https://circleci.com/gh/nonbili/purescript-html-parser-halogen.svg?style=svg)](https://circleci.com/gh/nonbili/purescript-html-parser-halogen)
+[![CircleCI](https://circleci.com/gh/rnons/purescript-html-parser-halogen.svg?style=svg)](https://circleci.com/gh/rnons/purescript-html-parser-halogen)
 
 A library to render raw HTML string into halogen views.
 
