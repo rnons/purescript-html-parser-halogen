@@ -2,13 +2,13 @@ module Test.Main where
 
 import Prelude
 
-import Data.Either (Either(..))
+import Data.Either (Either(..), isRight)
 import Data.Foldable (sequence_)
 import Data.List (List)
 import Data.List as List
 import Effect (Effect)
 import Html.Parser (HtmlAttribute(..), HtmlNode(..), parse)
-import Jest (expectToEqual, test)
+import Jest (expectToBeTrue, expectToEqual, test)
 
 type Spec =
   { name :: String
@@ -54,7 +54,21 @@ specs =
     }
   ]
 
+rightHtml :: Array String
+rightHtml =
+  [ "<iframe></iframe>"
+  , "<iframe width ></iframe>"
+  , """<iframe width ="560" ></iframe>"""
+  , "<iframe width='560' ></iframe>"
+  , """<iframe width = "560" ></iframe>"""
+  , "<iframe width='560' height='315' src='//www.youtube.com/embed/gE6j-Zp323w' frameborder='0' allowfullscreen></iframe>"
+  ]
+
 main :: Effect Unit
 main = do
   sequence_ $ specs <#> \spec -> do
     test spec.name $ expectToEqual (parse spec.raw) (Right spec.expected)
+
+  sequence_ $ rightHtml <#> \html -> do
+    test ("should parse right: " <> html) $
+      expectToBeTrue (isRight $ parse html)

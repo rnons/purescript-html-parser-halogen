@@ -1,6 +1,7 @@
 {
   "scripts": {
     "build:ci": "pulp build -I test -- +RTS -N2 -RTS",
+    "postinstall": "bower install",
     "test": "pulp build -I test && jest"
   },
   "devDependencies": {
