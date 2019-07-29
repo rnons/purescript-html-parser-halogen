@@ -54,8 +54,24 @@ charListToString = fromCharArray <<< Array.fromFoldable
 attributeParser :: Parser HtmlAttribute
 attributeParser = do
   k <- regex "[^=>/]+"
-  v <- option "" (string "=\"" *> regex "[^\"]*" <* string "\"")
+  v <- option "" (equals *> quotedString)
   pure $ HtmlAttribute k v
+
+equals :: Parser String
+equals =
+  string "=" <* whiteSpace
+
+quotedString :: Parser String
+quotedString =
+  quotedString1 <|> quotedString2
+
+quotedString1 :: Parser String
+quotedString1 =
+  string "'" *> regex "[^']*" <* string "'"
+
+quotedString2 :: Parser String
+quotedString2 =
+  string "\"" *> regex "[^\"]*" <* string "\""
 
 openingParser :: Parser Element
 openingParser = do
