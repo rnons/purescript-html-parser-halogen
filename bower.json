@@ -8,7 +8,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/rnons/purescript-html-parser-halogen.git"
+    "url": "git://github.com/newlandsvalley/purescript-html-parser-halogen.git"
   },
   "license": "BSD-3-Clause",
   "ignore": [
