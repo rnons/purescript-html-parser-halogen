@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build:ci": "pulp build -I test -- +RTS -N2 -RTS",
+    "test": "pulp build -I test && jest"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
+}

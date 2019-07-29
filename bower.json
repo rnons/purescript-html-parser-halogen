@@ -8,25 +8,27 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/newlandsvalley/purescript-html-parser-halogen.git"
+    "url": "git://github.com/rnons/purescript-html-parser-halogen.git"
   },
   "license": "BSD-3-Clause",
   "ignore": [
     "**/.*",
-    "node_modules",
     "bower_components",
-    "output",
     "docs",
-    "example"
+    "example",
+    "node_modules",
+    "output",
+    "yarn.lock"
   ],
   "dependencies": {
-    "purescript-string-parsers": "^4.0.0",
-    "purescript-generics-rep": "^6.0.0",
-    "purescript-halogen": "https://github.com/slamdata/purescript-halogen.git#5.0.0-rc.4"
+    "purescript-string-parsers": "^5.0.0",
+    "purescript-generics-rep": "^6.1.1",
+    "purescript-halogen": "^5.0.0-rc.4"
   },
   "devDependencies": {
     "purescript-psci-support": "^4.0.0",
+    "purescript-jest": "^0.2.0",
     "purescript-test-unit": "^15.0.0",
-    "purescript-console": "^4.2.0"
+    "purescript-debug": "^4.0.0"
   }
 }

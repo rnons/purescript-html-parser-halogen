@@ -18,14 +18,15 @@ import Data.List as List
 import Data.String.CodeUnits (fromCharArray)
 import Text.Parsing.StringParser (Parser, ParseError, runParser, try)
 import Text.Parsing.StringParser.Combinators (many, manyTill, option, optional, sepEndBy)
-import Text.Parsing.StringParser.String (anyChar, regex, skipSpaces, string, whiteSpace)
+import Text.Parsing.StringParser.CodeUnits (anyChar, regex, skipSpaces, string, whiteSpace)
 
 data HtmlNode
   = HtmlElement Element
   | HtmlText String
   | HtmlComment String
 
-derive instance genericRepHtmlNode :: Generic HtmlNode _
+derive instance eqHtmlNode :: Eq HtmlNode
+derive instance genericHtmlNode :: Generic HtmlNode _
 instance showHtmlNode :: Show HtmlNode where show = defer \_ -> genericShow
 
 type Element =
@@ -36,7 +37,8 @@ type Element =
 
 data HtmlAttribute = HtmlAttribute String String
 
-derive instance genericRepHtmlAttribute :: Generic HtmlAttribute _
+derive instance eqHtmlAttribute :: Eq HtmlAttribute
+derive instance genericHtmlAttribute :: Generic HtmlAttribute _
 instance showHtmlAttribute :: Show HtmlAttribute where show = genericShow
 
 mkElement :: String -> List HtmlAttribute -> List HtmlNode -> Element
@@ -74,7 +76,7 @@ quotedString2 =
 openingParser :: Parser Element
 openingParser = do
   _ <- string "<"
-  tagName <- regex "[^/> ]+"
+  tagName <- regex "[^/>\n ]+"
   attributes <- whiteSpace *> sepEndBy attributeParser whiteSpace
   pure $ mkElement tagName attributes List.Nil
 
