@@ -22,7 +22,7 @@
   "dependencies": {
     "purescript-string-parsers": "^4.0.0",
     "purescript-generics-rep": "^6.0.0",
-    "purescript-halogen": "^4.0.0"
+    "purescript-halogen": "https://github.com/slamdata/purescript-halogen.git#5.0.0-rc.4"
   },
   "devDependencies": {
     "purescript-psci-support": "^4.0.0"
