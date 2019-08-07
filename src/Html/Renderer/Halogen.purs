@@ -1,4 +1,4 @@
-module Html.Parser.Halogen
+module Html.Renderer.Halogen
   ( htmlAttributeToProp
   , elementToHtml
   , nodeToHtml

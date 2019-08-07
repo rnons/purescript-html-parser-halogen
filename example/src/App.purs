@@ -8,7 +8,7 @@ import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Html.Parser.Halogen as PH
+import Html.Renderer.Halogen as PH
 
 type Query = Const Void
 
