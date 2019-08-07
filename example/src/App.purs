@@ -67,7 +67,7 @@ render state =
   , HH.div [ class_ "col col-preview" ]
     [ HH.h4_ [ HH.text "PREVIEW" ]
     , HH.div [ class_ "preview" ]
-      [ PH.render state.value ]
+      [ PH.render_ state.value ]
     ]
   , HH.div [ class_ "footer" ]
     [ HH.a
