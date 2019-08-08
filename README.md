@@ -10,17 +10,17 @@ See [Demo](https://rnons.github.io/purescript-html-parser-halogen/) for an examp
 ## How to use
 
 ```purescript
-import Html.Parser.Halogen as PH
+import Html.Renderer.Halogen as RH
 
 rawHtml :: String
 rawHtml = """<a href="https://github.com">a link</a>"""
 
 render =
   ...
-  HH.div_ [ PH.render rawHtml ]
+  HH.div_ [ RH.render_ rawHtml ]
 ```
 
-It's as simple as this, in most cases you only need the `render` function from `Html.Parser.Halogen` module.
+It's as simple as this, in most cases you only need the `render` function from `Html.Renderer.Halogen` module.
 
 ## Be cautious
 
@@ -30,11 +30,10 @@ You can balance and sanitize the HTML on the backend, e.g. `sanitizeBalance` fro
 
 ## How it works
 
-`Html.Parser` parses HTML `String` as `HtmlNode`. `Html.Parser.Halogen` converts `HtmlNode` to halogen `HTML`. You can also write adapters to convert `HtmlNode` to the `HTML` type of other view libraries.
+`Html.Parser` parses HTML `String` as `HtmlNode`. `Html.Renderer.Halogen` converts `HtmlNode` to halogen `HTML`. You can also write adapters to convert `HtmlNode` to the `HTML` type of other view libraries.
 
-If you want to `Html.Parser** with other view libraries, I can release it as a separate package, let me know if you are interested.
+If you want to `Html.Parser` with other view libraries, I can release it as a separate package, let me know if you are interested.
 
 ## Other approaches to render raw HTML into halogen views
 
 - https://github.com/slamdata/purescript-halogen/issues/324
-- [Websites with Servant and Purescript/Halogen](https://www.fosskers.ca/), see the ***2.3.4 Requesting and Injecting HTML*** section
