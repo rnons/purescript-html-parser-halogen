@@ -1,13 +1,6 @@
 exports.decodeHtmlEntity = function(input) {
-  var DOMParser = DOMParser;
   if (!DOMParser) {
-    var jsdom;
-    try {
-      jsdom = require("jsdom");
-    } catch (_) {
-      return input;
-    }
-    DOMParser = new jsdom.JSDOM().window.DOMParser;
+    return input;
   }
 
   // https://stackoverflow.com/a/34064434
