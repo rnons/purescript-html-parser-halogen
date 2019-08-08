@@ -108,10 +108,10 @@ elementParser = defer \_ -> do
     closingOrChildrenParser >>=
     pure <<< HtmlElement
 
-foreign import htmlDecode :: String -> String
+foreign import decodeHtmlEntity :: String -> String
 
 textParser :: Parser HtmlNode
-textParser = HtmlText <<< htmlDecode <$> regex "[^<]+"
+textParser = HtmlText <<< decodeHtmlEntity <$> regex "[^<]+"
 
 commentParser :: Parser HtmlNode
 commentParser = do
