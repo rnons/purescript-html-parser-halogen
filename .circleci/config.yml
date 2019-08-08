@@ -74,7 +74,11 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - test
+      - test:
+          filters:
+            branches:
+              ignore:
+                - gh-pages
       - deploy:
           context: gh-pages
           requires:
