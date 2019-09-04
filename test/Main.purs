@@ -47,9 +47,9 @@ specs =
   , { name: "simple <a> tag with line break"
     , raw: simpleATagLineBreak
     , expected: List.fromFoldable $
-        [ HtmlText ""
+        [ HtmlText "\n"
         , simpleATagExpected
-        , HtmlText ""
+        , HtmlText "\n"
         ]
     }
   , { name: "html entities"
@@ -60,6 +60,18 @@ specs =
             , attributes: List.Nil
             , children: List.singleton $ HtmlText "a&b"
             }
+        ]
+    }
+  , { name: "tag inside text"
+    , raw: "a <b>b</b> c"
+    , expected: List.fromFoldable
+        [ HtmlText "a "
+        , HtmlElement
+            { name: "b"
+            , attributes: List.Nil
+            , children: List.singleton $ HtmlText "b"
+            }
+        , HtmlText " c"
         ]
     }
   ]
