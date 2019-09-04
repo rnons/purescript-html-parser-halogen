@@ -1,5 +1,5 @@
 exports.decodeHtmlEntity = function(input) {
-  if (!DOMParser) {
+  if (typeof DOMParser === "undefined") {
     return input;
   }
 
