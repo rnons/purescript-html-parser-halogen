@@ -5,6 +5,7 @@ module Html.Renderer.Halogen
   , parse
   , render_
   , render
+  , renderToArray
   ) where
 
 import Prelude
@@ -43,5 +44,8 @@ render_ :: forall p i. String -> HH.HTML p i
 render_ = render []
 
 render :: forall p i. Array (HH.IProp HTMLdiv i) -> String -> HH.HTML p i
-render props raw = HH.div props $
+render props = HH.div props <<< renderToArray
+
+renderToArray :: forall p i. String -> Array (HH.HTML p i)
+renderToArray raw =
   either (\err -> [ HH.text err ]) identity (parse raw)
