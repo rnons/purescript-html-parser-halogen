@@ -3,9 +3,9 @@
 [![purescript-html-parser-halogen on Pursuit](https://pursuit.purescript.org/packages/purescript-html-parser-halogen/badge)](https://pursuit.purescript.org/packages/purescript-html-parser-halogen)
 [![CircleCI](https://circleci.com/gh/rnons/purescript-html-parser-halogen.svg?style=svg)](https://circleci.com/gh/rnons/purescript-html-parser-halogen)
 
-A library to render raw HTML string into halogen views.
+A library to render raw HTML string into Halogen views. You might also be interested in [purescript-markdown-it-halogen](https://github.com/nonbili/purescript-markdown-it-halogen), a library to render Markdown into Halogen views.
 
-See [Demo](https://rnons.github.io/purescript-html-parser-halogen/) for an example.
+[Playground](https://rnons.github.io/purescript-html-parser-halogen/)
 
 ## How to use
 
