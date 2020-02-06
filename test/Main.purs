@@ -80,6 +80,7 @@ rightHtml :: Array String
 rightHtml =
   [ "<iframe></iframe>"
   , "<iframe width ></iframe>"
+  , "<iframe width src='//'></iframe>"
   , """<iframe width ="560" ></iframe>"""
   , "<iframe width='560' ></iframe>"
   , """<iframe width = "560" ></iframe>"""

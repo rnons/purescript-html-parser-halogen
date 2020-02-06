@@ -17,8 +17,8 @@ import Data.List (List)
 import Data.List as List
 import Data.String.CodeUnits (fromCharArray)
 import Text.Parsing.StringParser (Parser, ParseError, runParser, try)
-import Text.Parsing.StringParser.Combinators (many, manyTill, option, optional, sepEndBy)
 import Text.Parsing.StringParser.CodeUnits (anyChar, regex, skipSpaces, string, whiteSpace)
+import Text.Parsing.StringParser.Combinators (many, manyTill, option, optional, sepEndBy)
 
 data HtmlNode
   = HtmlElement Element
@@ -53,7 +53,8 @@ charListToString = fromCharArray <<< Array.fromFoldable
 
 attributeParser :: Parser HtmlAttribute
 attributeParser = do
-  k <- regex "[^=>/]+"
+  k <- regex "[^=>/ ]+"
+  void whiteSpace
   v <- option "" (equals *> quotedString)
   pure $ HtmlAttribute k v
 
