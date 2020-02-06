@@ -9,7 +9,6 @@
   ],
   "dependencies": {
     "purescript-string-parsers": "^5.0.0",
-    "purescript-generics-rep": "^6.1.1",
     "purescript-halogen": "^5.0.0-rc.4"
   },
   "devDependencies": {

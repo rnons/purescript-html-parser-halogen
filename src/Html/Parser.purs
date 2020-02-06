@@ -11,8 +11,6 @@ import Control.Alt ((<|>))
 import Control.Lazy (defer)
 import Data.Array as Array
 import Data.Either (Either)
-import Data.Generic.Rep (class Generic)
-import Data.Generic.Rep.Show (genericShow)
 import Data.List (List)
 import Data.List as List
 import Data.String.CodeUnits (fromCharArray)
@@ -26,8 +24,6 @@ data HtmlNode
   | HtmlComment String
 
 derive instance eqHtmlNode :: Eq HtmlNode
-derive instance genericHtmlNode :: Generic HtmlNode _
-instance showHtmlNode :: Show HtmlNode where show = defer \_ -> genericShow
 
 type Element =
   { name :: String
@@ -38,8 +34,6 @@ type Element =
 data HtmlAttribute = HtmlAttribute String String
 
 derive instance eqHtmlAttribute :: Eq HtmlAttribute
-derive instance genericHtmlAttribute :: Generic HtmlAttribute _
-instance showHtmlAttribute :: Show HtmlAttribute where show = genericShow
 
 mkElement :: String -> List HtmlAttribute -> List HtmlNode -> Element
 mkElement =
