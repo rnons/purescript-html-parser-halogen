@@ -74,6 +74,12 @@ specs =
         , HtmlText " c"
         ]
     }
+  , { name: "non breaking space"
+      -- The first character is a non breaking space (code point 160).
+    , raw: "  1234"
+    , expected: List.singleton $
+        HtmlText "  1234"
+    }
   ]
 
 rightHtml :: Array String

@@ -11,6 +11,9 @@ exports.decodeHtmlEntity = function(input) {
   }
 
   // https://stackoverflow.com/a/34064434
-  var doc = new DOMParser().parseFromString(input, "text/html");
+  var doc = new DOMParser().parseFromString(
+    input.slice(space.length),
+    "text/html"
+  );
   return space + doc.documentElement.textContent;
 };
