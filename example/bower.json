@@ -9,6 +9,7 @@
   ],
   "dependencies": {
     "purescript-string-parsers": "^6.0.0",
+    "purescript-jest": "^0.5.0",
     "purescript-halogen": "^6.1.0"
   },
   "devDependencies": {
