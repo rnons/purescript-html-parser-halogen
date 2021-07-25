@@ -2,14 +2,16 @@ module App where
 
 import Prelude
 
+import Control.Monad.State (class MonadState)
 import Data.Const (Const)
-import Data.Maybe (Maybe(..))
+import Effect.Aff.Class (class MonadAff)
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Html.Renderer.Halogen as PH
 
+type Query :: forall k. k -> Type
 type Query = Const Void
 
 data Action = OnValueChange String
@@ -51,47 +53,49 @@ class_ = HP.class_ <<< HH.ClassName
 style :: forall r i. String -> HP.IProp ("style" :: String | r) i
 style = HP.attr (HH.AttrName "style")
 
-render :: forall m. State -> H.ComponentHTML Action () m
-render state =
-  HH.div [ class_ "grid" ]
-  [ HH.h2 [ class_ "header" ]
-    [ HH.text "purescript-html-parser-halogen example" ]
-  , HH.div [ class_ "col col-edit" ]
-    [ HH.h4_ [ HH.text "EDIT" ]
-    , HH.textarea
-      [ class_ "edit"
-      , HP.value state.value
-      , HE.onValueInput $ Just <<< OnValueChange
-      ]
-    ]
-  , HH.div [ class_ "col col-preview" ]
-    [ HH.h4_ [ HH.text "PREVIEW" ]
-    , HH.div [ class_ "preview" ]
-      [ PH.render_ state.value ]
-    ]
-  , HH.div [ class_ "footer" ]
-    [ HH.a
-      [ HP.href demoSourceUrl] [HH.text "source code"]
-    , HH.text " Powered by "
-    , HH.img
-      [ HP.src "https://upload.wikimedia.org/wikipedia/commons/6/64/PureScript_Logo.png"
-      , style "width: 1rem; height: 1rem"
-      ]
-    ]
-  ]
-  where
-  repoUrl = "https://github.com/rnons/purescript-html-parser-halogen"
-  demoSourceUrl = repoUrl <> "/tree/master/example"
-
-app :: forall m. H.Component HH.HTML Query Unit Void m
-app = H.mkComponent
+component :: forall query input output m. MonadAff m => H.Component query input output m
+component = H.mkComponent
   { initialState: const initialState
   , render
   , eval: H.mkEval $ H.defaultEval
       { handleAction = handleAction }
   }
+  where
 
-handleAction :: forall m. Action -> H.HalogenM State Action () Void m Unit
+  render state =
+    HH.div [ class_ "grid" ]
+    [ HH.h2 [ class_ "header" ]
+      [ HH.text "purescript-html-parser-halogen example" ]
+    , HH.div [ class_ "col col-edit" ]
+      [ HH.h4_ [ HH.text "EDIT" ]
+      , HH.textarea
+        [ class_ "edit"
+        , HP.value state.value
+        , HE.onValueInput \s -> OnValueChange s
+        ]
+      ]
+    , HH.div [ class_ "col col-preview" ]
+      [ HH.h4_ [ HH.text "PREVIEW" ]
+      , HH.div [ class_ "preview" ]
+        [ PH.render_ state.value ]
+      ]
+    , HH.div [ class_ "footer" ]
+      [ HH.a
+        [ HP.href demoSourceUrl] [HH.text "source code"]
+      , HH.text " Powered by "
+      , HH.img
+        [ HP.src "https://upload.wikimedia.org/wikipedia/commons/6/64/PureScript_Logo.png"
+        , style "width: 1rem; height: 1rem"
+        ]
+      ]
+    ]
+    where
+    repoUrl = "https://github.com/rnons/purescript-html-parser-halogen"
+    demoSourceUrl = repoUrl <> "/tree/master/example"
+
+handleAction :: forall m.
+  MonadState State m =>
+  Action -> m Unit
 handleAction = case _ of
   OnValueChange value -> do
     H.modify_ $ _ { value = value }
