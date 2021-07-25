@@ -8,10 +8,10 @@
     "output"
   ],
   "dependencies": {
-    "purescript-string-parsers": "^5.0.0",
-    "purescript-halogen": "^5.0.0-rc.4"
+    "purescript-string-parsers": "^6.0.0",
+    "purescript-halogen": "^6.1.0"
   },
   "devDependencies": {
-    "purescript-psci-support": "^4.0.0"
+    "purescript-psci-support": "^5.0.0"
   }
 }
