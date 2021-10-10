@@ -1,0 +1,28 @@
+name: Publish gh-pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Build
+        run: |
+          cd example
+          yarn add purescript spago
+          yarn build
+      - name: Publish
+        run: |
+          cp docs/* .
+          git config user.email "remotenonsense@gmail.com"
+          git config user.name "GHActions"
+          git add . && git commit -am 'build gh-pages'
+          git push -f origin HEAD:gh-pages
