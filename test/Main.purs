@@ -80,6 +80,15 @@ specs =
     , expected: List.singleton $
         HtmlText "  1234"
     }
+  , { name: "<script> tag"
+    , raw: "<script>a<b>c</script>"
+    , expected: List.singleton $
+        HtmlElement
+          { name: "script"
+          , attributes: List.Nil
+          , children: List.singleton $ HtmlText "a<b>c"
+          }
+    }
   ]
 
 rightHtml :: Array String

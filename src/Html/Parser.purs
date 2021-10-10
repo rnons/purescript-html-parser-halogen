@@ -88,8 +88,16 @@ closingOrChildrenParser :: Element -> Parser Element
 closingOrChildrenParser element = defer \_ ->
   if isSelfClosingElement element
   then whiteSpace *> optional (string "/") *> string ">" *> pure element
-  else childrenParser
+  else
+    if element.name == "script"
+    then scriptParser
+    else childrenParser
   where
+    scriptParser = do
+      _ <- whiteSpace *> string ">"
+      content <- manyTill anyChar (string "</script>")
+      pure $ element
+        { children = List.singleton $ HtmlText $ charListToString content }
     childrenParser = do
       _ <- whiteSpace *> string ">"
       children <- manyTill nodeParser

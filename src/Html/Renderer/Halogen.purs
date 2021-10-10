@@ -34,7 +34,7 @@ elementToHtml ele =
 nodeToHtml :: forall p i. HtmlNode -> HH.HTML p i
 nodeToHtml (HtmlElement ele) = elementToHtml ele
 nodeToHtml (HtmlText str) = HH.text str
-nodeToHtml (HtmlComment str) = HH.text ""
+nodeToHtml (HtmlComment _) = HH.text ""
 
 parse :: forall p i. String -> Either String (Array (HH.HTML p i))
 parse raw =
