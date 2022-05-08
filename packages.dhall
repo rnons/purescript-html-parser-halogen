@@ -1,12 +1,13 @@
 let upstream =
-      https://github.com/purescript/package-sets/releases/download/psc-0.14.4-20211005/packages.dhall sha256:2ec351f17be14b3f6421fbba36f4f01d1681e5c7f46e0c981465c4cf222de5be
+      https://github.com/purescript/package-sets/releases/download/psc-0.15.0-20220507/packages.dhall
+        sha256:cf54330f3bc1b25a093b69bff8489180c954b43668c81288901a2ec29a08cc64
 
 let extra =
       { jest =
-          { dependencies = [ "effect", "aff", "aff-promise" ]
-          , repo = "https://github.com/nonbili/purescript-jest.git"
-          , version = "v0.5.0"
-          }
+        { dependencies = [ "effect", "aff", "aff-promise" ]
+        , repo = "https://github.com/klntsky/purescript-jest.git"
+        , version = "7feaa5a880fc75002c4eca312993174e7220252b"
+        }
       }
 
 in  upstream // extra

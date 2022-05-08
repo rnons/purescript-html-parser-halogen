@@ -7,6 +7,17 @@ module Html.Parser
 
 import Prelude
 
+import Control.Alt ((<|>))
+import Control.Lazy (defer)
+import Data.Array as Array
+import Data.Either (Either)
+import Data.List (List)
+import Data.List as List
+import Data.String.CodeUnits (fromCharArray)
+import StringParser (Parser, ParseError, runParser, try)
+import StringParser.CodeUnits (anyChar, regex, skipSpaces, string, whiteSpace)
+import StringParser.Combinators (many, manyTill, option, optional, sepEndBy)
+
 data HtmlNode
   = HtmlElement Element
   | HtmlText String

@@ -1,7 +1,8 @@
 {
+  "type": "module",
   "scripts": {
-    "build": "spago build -u '--strict --stash +RTS -N2 -RTS'",
-    "test": "spago build && jest"
+    "build": "spago build -u '+RTS -N2 -RTS'",
+    "test": "spago build && NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "devDependencies": {
     "jest": "^28.1.0",

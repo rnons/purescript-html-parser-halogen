@@ -1,3 +1,3 @@
-const Test = require("Test.Main");
+import { main } from "Test.Main";
 
-Test.main();
+main();
