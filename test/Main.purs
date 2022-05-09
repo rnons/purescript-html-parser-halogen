@@ -2,10 +2,8 @@ module Test.Main where
 
 import Prelude
 
-import Data.Either (Either(..), isRight)
+import Data.Array as Array
 import Data.Foldable (sequence_)
-import Data.List (List)
-import Data.List as List
 import Effect (Effect)
 import Html.Parser (HtmlAttribute(..), HtmlNode(..), parse)
 import Jest (expectToBeTrue, expectToEqual, test)
@@ -13,63 +11,47 @@ import Jest (expectToBeTrue, expectToEqual, test)
 type Spec =
   { name :: String
   , raw :: String
-  , expected :: List HtmlNode
+  , expected :: Array HtmlNode
   }
-
-simpleATagLineBreak :: String
-simpleATagLineBreak = """
-<a
-  href="https://purescript.org"
-  target="blank_"
-  >purescript</a>
-"""
 
 simpleATagExpected :: HtmlNode
 simpleATagExpected = HtmlElement
   { name: "a"
-  , attributes: List.fromFoldable
+  , attributes:
       [ HtmlAttribute "href" "https://purescript.org"
       , HtmlAttribute "target" "blank_"
       ]
-  , children: List.singleton $ HtmlText "purescript"
+  , children: [HtmlText "purescript"]
   }
 
 specs :: Array Spec
 specs =
   [ { name: "plain text"
     , raw: "abc"
-    , expected: List.singleton $ HtmlText "abc"
+    , expected: [HtmlText "abc"]
     }
   , { name: "simple <a> tag"
     , raw: "<a href=\"https://purescript.org\" target=\"blank_\">purescript</a>"
-    , expected: List.singleton $ simpleATagExpected
-    }
-  , { name: "simple <a> tag with line break"
-    , raw: simpleATagLineBreak
-    , expected: List.fromFoldable $
-        [ HtmlText "\n"
-        , simpleATagExpected
-        , HtmlText "\n"
-        ]
+    , expected: [simpleATagExpected]
     }
   , { name: "html entities"
     , raw: "<div>a&amp;b</div>"
-    , expected: List.fromFoldable $
+    , expected:
         [ HtmlElement
             { name: "div"
-            , attributes: List.Nil
-            , children: List.singleton $ HtmlText "a&b"
+            , attributes: []
+            , children: [HtmlText "a&b"]
             }
         ]
     }
   , { name: "tag inside text"
     , raw: "a <b>b</b> c"
-    , expected: List.fromFoldable
+    , expected:
         [ HtmlText "a "
         , HtmlElement
             { name: "b"
-            , attributes: List.Nil
-            , children: List.singleton $ HtmlText "b"
+            , attributes: []
+            , children: [HtmlText "b"]
             }
         , HtmlText " c"
         ]
@@ -77,17 +59,17 @@ specs =
   , { name: "non breaking space"
       -- The first character is a non breaking space (code point 160).
     , raw: "  1234"
-    , expected: List.singleton $
-        HtmlText "  1234"
+    , expected: [HtmlText "  1234"]
     }
   , { name: "<script> tag"
     , raw: "<script>a<b>c</script>"
-    , expected: List.singleton $
-        HtmlElement
+    , expected:
+        [ HtmlElement
           { name: "script"
-          , attributes: List.Nil
-          , children: List.singleton $ HtmlText "a<b>c"
+          , attributes: []
+          , children: [HtmlText "a<b>c"]
           }
+        ]
     }
   ]
 
@@ -105,8 +87,8 @@ rightHtml =
 main :: Effect Unit
 main = do
   sequence_ $ specs <#> \spec -> do
-    test spec.name $ expectToEqual (parse spec.raw) (Right spec.expected)
+    test spec.name $ expectToEqual (parse spec.raw) spec.expected
 
   sequence_ $ rightHtml <#> \html -> do
     test ("should parse right: " <> html) $
-      expectToBeTrue (isRight $ parse html)
+      expectToBeTrue $ Array.length (parse html) > 0

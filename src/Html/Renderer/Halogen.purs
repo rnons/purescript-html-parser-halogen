@@ -2,7 +2,6 @@ module Html.Renderer.Halogen
   ( htmlAttributeToProp
   , elementToHtml
   , nodeToHtml
-  , parse
   , render_
   , render
   , renderToArray
@@ -11,8 +10,6 @@ module Html.Renderer.Halogen
 import Prelude
 
 import Data.Array as Array
-import Data.Bifunctor (lmap)
-import Data.Either (Either, either)
 import DOM.HTML.Indexed (HTMLdiv)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -36,10 +33,6 @@ nodeToHtml (HtmlElement ele) = elementToHtml ele
 nodeToHtml (HtmlText str) = HH.text str
 nodeToHtml (HtmlComment _) = HH.text ""
 
-parse :: forall p i. String -> Either String (Array (HH.HTML p i))
-parse raw =
-  lmap show $ (Array.fromFoldable <<< map nodeToHtml) <$> Parser.parse raw
-
 render_ :: forall p i. String -> HH.HTML p i
 render_ = render []
 
@@ -47,5 +40,4 @@ render :: forall p i. Array (HH.IProp HTMLdiv i) -> String -> HH.HTML p i
 render props = HH.div props <<< renderToArray
 
 renderToArray :: forall p i. String -> Array (HH.HTML p i)
-renderToArray raw =
-  either (\err -> [ HH.text err ]) identity (parse raw)
+renderToArray raw = map nodeToHtml $ Parser.parse raw

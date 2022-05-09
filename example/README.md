@@ -1,5 +1,5 @@
 ```
 yarn
-pulp -w build -I ../src
+yarn build
 yarn start
 ```
