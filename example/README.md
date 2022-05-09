@@ -1,5 +1,5 @@
 ```
 yarn
-yarn build
+spago build -w
 yarn start
 ```
