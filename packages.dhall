@@ -5,8 +5,8 @@ let upstream =
 let extra =
       { jest =
         { dependencies = [ "effect", "aff", "aff-promise" ]
-        , repo = "https://github.com/klntsky/purescript-jest.git"
-        , version = "7feaa5a880fc75002c4eca312993174e7220252b"
+        , repo = "https://github.com/nonbili/purescript-jest.git"
+        , version = "018543987af27db6a3842048b6b3f5ec47609087"
         }
       }
 
