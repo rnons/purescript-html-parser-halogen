@@ -3,13 +3,16 @@
   [ "arrays"
   , "control"
   , "dom-indexed"
-  , "foldable-traversable"
   , "effect"
+  , "either"
+  , "foldable-traversable"
   , "halogen"
+  , "jest"
+  , "lists"
   , "maybe"
   , "prelude"
-  , "psci-support"
-  , "jest"
+  , "string-parsers"
+  , "strings"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
