@@ -10,5 +10,9 @@
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1",
     "webpack-dev-server": "^3.3.1"
+  },
+  "dependencies": {
+    "purescript": "0.15",
+    "spago": "^0.20.9"
   }
 }
