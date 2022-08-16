@@ -1,31 +1,28 @@
 {
-  "name": "purescript-html-parser-halogen",
-  "description": "A library to render HTML string into halogen views",
-  "keywords": [
-    "purescript",
-    "halogen",
-    "html"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/rnons/purescript-html-parser-halogen.git"
-  },
-  "license": "BSD-3-Clause",
-  "ignore": [
-    "**/.*",
-    "bower_components",
-    "docs",
-    "example",
-    "node_modules",
-    "output",
-    "yarn.lock"
-  ],
-  "dependencies": {
-    "purescript-string-parsers": "^6.0.0",
-    "purescript-halogen": "^6.1.0"
-  },
-  "devDependencies": {
-    "purescript-psci-support": "^5.0.0",
-    "purescript-debug": "^5.0.0"
-  }
+    "name": "purescript-html-parser-halogen",
+    "license": [
+        "BSD-3-Clause"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rnons/purescript-html-parser-halogen.git"
+    },
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "output"
+    ],
+    "dependencies": {
+        "purescript-arrays": "^v7.0.0",
+        "purescript-control": "^v6.0.0",
+        "purescript-dom-indexed": "^v11.0.0",
+        "purescript-effect": "^v4.0.0",
+        "purescript-foldable-traversable": "^v6.0.0",
+        "purescript-halogen": "^v7.0.0",
+        "purescript-jest": "^v1.0.0",
+        "purescript-maybe": "^v6.0.0",
+        "purescript-prelude": "^v6.0.0",
+        "purescript-psci-support": "^v6.0.0"
+    }
 }
