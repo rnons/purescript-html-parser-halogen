@@ -1,3 +1,3 @@
-import Main from "Main";
+import { main } from "Main";
 
-Main.main();
+main();
