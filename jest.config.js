@@ -3,6 +3,9 @@
 
 module.exports = {
   testEnvironment: "jsdom",
+  transform: {
+      "^.+\\.(js|jsx)$": "babel-jest",
+  },
 
   // An array of directory names to be searched recursively up from the requiring module's location
   moduleDirectories: ["node_modules", "output"],
