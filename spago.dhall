@@ -1,4 +1,6 @@
 { name = "html-parser-halogen"
+, license = "BSD-3-Clause"
+, repository = "https://github.com/rnons/purescript-html-parser-halogen.git"
 , dependencies =
   [ "arrays"
   , "control"
