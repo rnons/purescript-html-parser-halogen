@@ -49,7 +49,7 @@ function walk(treeWalker) {
   return nodes;
 }
 
-exports.parseFromString = elementCtor => attributeCtor => textCtor => commentCtor => input => {
+export const parseFromString = elementCtor => attributeCtor => textCtor => commentCtor => input => {
   function mapNode(node) {
     if (node.type == "element") {
       return elementCtor({
